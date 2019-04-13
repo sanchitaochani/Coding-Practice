@@ -1,0 +1,10 @@
+class Solution {
+    public int[] sortedSquares(int[] A) {
+        int[] arr_squares = new int[A.length];
+        for (int i=0; i<A.length; i++) {
+            arr_squares[i] = (int) Math.pow(A[i],2);
+        }
+        Arrays.sort(arr_squares);
+        return arr_squares;
+    }
+}

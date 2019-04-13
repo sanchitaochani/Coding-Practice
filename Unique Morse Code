@@ -1,0 +1,42 @@
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+        HashMap<Character, String> dict = new HashMap<>();
+        dict.put('a',".-");
+        dict.put('b',"-...");
+        dict.put('c',"-.-.");
+        dict.put('d',"-..");
+        dict.put('e',".");
+        dict.put('f',"..-.");
+        dict.put('g',"--.");
+        dict.put('h',"....");
+        dict.put('i',"..");
+        dict.put('j',".---");
+        dict.put('k',"-.-");
+        dict.put('l',".-..");
+        dict.put('m',"--");
+        dict.put('n',"-.");
+        dict.put('o',"---");
+        dict.put('p',".--.");
+        dict.put('q',"--.-");
+        dict.put('r',".-.");
+        dict.put('s',"...");
+        dict.put('t',"-");
+        dict.put('u',"..-");
+        dict.put('v',"...-");
+        dict.put('w',".--");
+        dict.put('x',"-..-");
+        dict.put('y',"-.--");
+        dict.put('z',"--..");
+        HashSet<String> morseCode = new HashSet<String>();
+        for (int i=0; i<words.length;i++) {
+            String morseRepresentation="";
+            for (int j=0;j<words[i].length();j++){
+                Character c = words[i].charAt(j);
+                //System.out.println(c);
+                morseRepresentation = morseRepresentation + dict.get(c);
+            }
+            morseCode.add(morseRepresentation);
+        }
+        return morseCode.size();
+    }
+}

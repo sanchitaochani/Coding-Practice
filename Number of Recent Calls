@@ -1,0 +1,32 @@
+//USING TREEMAP. 
+
+class RecentCounter {
+
+    TreeMap<Integer, String> treemap;
+    public RecentCounter() {
+        treemap = new TreeMap<>();
+    }
+    
+    public int ping(int t) {
+        treemap.put(t, "val");
+        int x = treemap.tailMap(t-3000).size();
+        return x;
+    }
+}
+
+// USING QUEUE
+
+class RecentCounter {
+
+    Queue<Integer> q;
+    public RecentCounter() {
+        q = new PriorityQueue<>();
+    }
+    
+    public int ping(int t) {
+        q.add(t);
+        while (q.peek()<t-3000)
+            q.poll();
+        return q.size();
+    }
+}

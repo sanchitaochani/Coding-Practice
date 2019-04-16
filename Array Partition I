@@ -1,0 +1,17 @@
+class Solution {
+    public int arrayPairSum(int[] nums) {
+        ArrayList<Integer> minValues = new ArrayList<>();
+        int sum=0;
+        Arrays.sort(nums);
+        for (int i=0; i<nums.length-1; i=i+2) {
+            int min = Math.min(nums[i], nums[i+1]);
+            minValues.add(min);
+            sum=sum+min;
+        }
+        
+        if (minValues.size()<=1)
+            return minValues.get(0);
+
+        return sum;
+    }
+}

@@ -1,0 +1,15 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        String element;
+		ArrayList<String> solution= new ArrayList<String>();
+		for(int i=0;i<words.length;i++) {
+			element=words[i];
+			if(element.matches("[QWERTYUIOPqwertyuiop]+|[ASDFGHJKLasdfghjkl]+|[ZXCVBNMzxcvbnm]+")) {
+				solution.add(element);
+			}
+			
+		}
+		String[] sol=solution.toArray(new String[solution.size()]);
+        return sol;
+    }
+}

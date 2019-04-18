@@ -1,0 +1,28 @@
+class Solution {
+    public String toGoatLatin(String S) {
+        String[] words = S.split(" ");
+        StringBuffer result = new StringBuffer();
+        int x=1;
+        for (int i=0; i<words.length; i++) {
+            StringBuffer temp = new StringBuffer(words[i]);
+            if (temp.charAt(0)=='a' || temp.charAt(0)=='e' || temp.charAt(0)=='i' ||                        temp.charAt(0)=='o' || temp.charAt(0)=='u' || temp.charAt(0)=='A' ||                        temp.charAt(0)=='E' || temp.charAt(0)=='I' || temp.charAt(0)=='O' ||                        temp.charAt(0)=='U' ) {
+                temp.append("ma");
+            }
+            else {
+                char ch = temp.charAt(0);
+                temp.deleteCharAt(0);
+                temp.append(ch);
+                temp.append("ma");
+            }
+            int j=0;
+            while (j<x) {
+                temp.append("a");
+                j++;
+            }
+            x++;
+            result.append(temp + " ");
+        }
+        
+        return result.toString().trim();
+    }
+}

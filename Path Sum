@@ -1,0 +1,36 @@
+class Solution {
+    boolean result = false;
+    public boolean hasPathSum(TreeNode root, int sum) {
+        int[] nodes = new int[100];
+		return helper(nodes, root, 0, sum);
+    }
+    
+    private boolean helper(int[] nodes, TreeNode node, int len, int val) {
+        
+		if (node==null)
+			return false;
+		nodes[len] = node.val;
+        len++;
+		if (node.left == null && node.right == null) {
+			int sum = calculateSum(nodes, len);
+            if (sum==val) {
+                result = true;
+                return result;
+            }
+		}
+		else {
+			helper(nodes, node.left, len, val);
+			helper(nodes, node.right, len, val);
+		}
+		
+        return result;
+	}
+    
+    private int calculateSum(int[] nodes, int len) {
+		int sum = 0;
+		for (int i=0; i<len; i++) {
+			sum = sum + nodes[i];
+		}
+		return sum;
+	}
+}

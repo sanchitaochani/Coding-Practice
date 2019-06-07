@@ -1,0 +1,24 @@
+class Solution {
+    List<Integer> values = new ArrayList<>();
+    public boolean isUnivalTree(TreeNode root) {
+        if (root==null)
+            return true;
+        traverse(root);
+        for (int i=0; i<values.size()-1; i++) {
+            if (values.get(i) != values.get(i+1))
+                return false;
+        }
+        return true;
+    }
+    
+    public void traverse(TreeNode node) {
+        if (node == null)
+            return;
+        if (node.left!=null)
+            traverse(node.left);
+        values.add(node.val);
+        if (node.right!=null)
+            traverse(node.right);
+    }
+
+}

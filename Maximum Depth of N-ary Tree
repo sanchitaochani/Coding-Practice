@@ -1,0 +1,21 @@
+class Solution {
+    int count = 0;
+    public int maxDepth(Node root) {
+        if (root == null)
+            return 0;
+        traverse(root, 1);
+        return count;
+    }
+    
+    public void traverse(Node node, int depth) {
+        if (node == null) {
+            return;
+        }
+        if (depth > count) {
+            count++;
+        }
+        for (Node child : node.children) {
+            traverse(child, depth+1);
+        }
+    }
+}

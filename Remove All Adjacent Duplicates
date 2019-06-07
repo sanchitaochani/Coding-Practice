@@ -1,0 +1,16 @@
+class Solution {
+    public String removeDuplicates(String S) {
+        StringBuffer s = new StringBuffer(S);
+        return helper(s).toString();
+    }
+    
+    public StringBuffer helper(StringBuffer str) {
+        for (int i=0; i<str.length()-1; i++) {
+            if (str.charAt(i) == str.charAt(i+1)) {
+                str.delete(i, i+2);
+                str = helper(str);
+            }
+        }
+        return str;
+    }
+}

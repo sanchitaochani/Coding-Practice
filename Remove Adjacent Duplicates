@@ -1,0 +1,19 @@
+class Solution {
+    public String removeDuplicates(String S) {
+        String[] patterns = {"aa", "bb", "cc", "dd", "ee", "ff", "gg", "hh", "ii", "jj", "kk", "ll", "mm", "nn", "oo", "pp", "qq", "rr", "ss", "tt", "uu", "vv", "ww", "xx", "yy", "zz"};
+        while (helper(S, patterns)!=null) {
+            String subs = helper(S, patterns);
+            S = S.replaceAll(subs, "");
+        }
+        return S;
+    }
+    
+    public String helper(String s, String[] pattern) {
+        for (int i=0; i<pattern.length; i++) {
+            if (s.contains(pattern[i])) {
+                return pattern[i];
+            }
+        }
+        return null;
+    }
+}

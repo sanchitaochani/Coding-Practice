@@ -1,0 +1,12 @@
+private String urlify(String s, int len) {
+			StringBuffer sb = new StringBuffer();
+			for (int i=0; i<s.length(); i++) {
+				if (s.charAt(i)==' ' && sb.length()<len) {
+					sb.append("%20");
+				}
+				else {
+					sb.append(s.charAt(i));
+				}
+			}
+			return sb.toString();
+}

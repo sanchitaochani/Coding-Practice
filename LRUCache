@@ -1,0 +1,88 @@
+import java.util.*;
+class LRUCache {
+    
+    class Node {
+        int key;
+        int val;
+        Node prev;
+        Node next;
+    }
+    
+    void addNode(Node node) {
+        node.prev = head;
+        node.next = head.next;
+        node.next.prev = node;
+        head.next = node;
+    }
+    
+    void deleteNode(Node node) {
+        Node prevNode = node.prev;
+        Node nextNode = node.next;
+        
+        prevNode.next = nextNode;
+        nextNode.prev = prevNode;
+    }
+    
+    void moveToHead(Node node) {
+        deleteNode(node);
+        addNode(node);
+    }
+    
+    Node pop() {
+        Node node = tail.prev;
+        deleteNode(node);
+        return node;
+    }
+
+    Hashtable<Integer, Node> cache = new Hashtable<Integer, Node>();
+    int size;
+    int capacity;
+    Node head, tail;
+    
+    public LRUCache(int capacity) {
+        this.size = 0;
+        this.capacity = capacity;
+        
+        head = new Node();
+        tail = new Node();
+        
+        head.next = tail;
+        tail.prev = head;
+    }
+    
+    public int get(int key) {
+        Node node = cache.get(key);
+        if (node == null) {
+            return -1;
+        }
+        
+        moveToHead(node);
+        
+        return node.val;
+    }
+    
+    public void put(int key, int value) {
+        Node node = cache.get(key);
+        
+        if (node == null) {
+            Node newNode = new Node();
+            newNode.key = key;
+            newNode.val = value;
+            
+            cache.put(key, newNode);
+            addNode(newNode);
+            
+            ++size;
+            
+            if (size>capacity) {
+                Node last = pop();
+                cache.remove(last.key);
+                --size;
+            }
+        }
+        else {
+            node.val = value;
+            moveToHead(node);
+        }
+    }
+}

@@ -1,0 +1,25 @@
+private static void sort(Stack<Integer> stack) {
+		// TODO Auto-generated method stub
+		Stack<Integer> temp = new Stack<>();
+		Stack<Integer> res = new Stack<>();
+		res.push(stack.pop());
+		while (!stack.isEmpty()) {
+			int x = stack.pop();
+			if (res.peek() <= x) {
+				res.push(x);
+			}
+			else {
+				while (res.size() > 0 && x < res.peek()) {
+					int y = res.pop();
+					temp.push(y);
+				}
+				res.push(x);
+				while (!temp.isEmpty()) {
+					int z = temp.pop();
+					res.push(z);
+				}
+			}
+		}
+		System.out.println(res);
+		
+	}

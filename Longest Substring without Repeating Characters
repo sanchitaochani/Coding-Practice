@@ -1,0 +1,28 @@
+//brute force solution. Inefficient for a very large input string
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        if (s.length() == 1)
+            return 1;
+        int len = 0;
+        for (int i=0; i<s.length(); i++) {
+            for (int j=i; j<=s.length(); j++) {
+                String sub = s.substring(i,j);
+                if (helper(sub)) {
+                    len = Math.max(len, sub.length());
+                }
+            }
+        }
+        return len;
+    }
+    
+    public boolean helper(String s) {
+        Set<Character> count = new HashSet<>();
+        for (int i=0; i<s.length(); i++) {
+            if (count.contains(s.charAt(i)))
+                return false;
+            count.add(s.charAt(i));
+        }
+        return true;
+    }
+}

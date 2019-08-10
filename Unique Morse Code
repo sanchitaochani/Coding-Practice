@@ -28,14 +28,12 @@ class Solution {
         dict.put('y',"-.--");
         dict.put('z',"--..");
         HashSet<String> morseCode = new HashSet<String>();
-        for (int i=0; i<words.length;i++) {
-            String morseRepresentation="";
-            for (int j=0;j<words[i].length();j++){
-                Character c = words[i].charAt(j);
-                //System.out.println(c);
-                morseRepresentation = morseRepresentation + dict.get(c);
+        for (int i=0; i<words.length; i++) {
+            StringBuffer morseRep = new StringBuffer();
+            for (int j=0; j<words[i].length(); j++) {
+                morseRep.append(dict.get(words[i].charAt(j)));
             }
-            morseCode.add(morseRepresentation);
+            morseCode.add(morseRep.toString());
         }
         return morseCode.size();
     }

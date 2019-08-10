@@ -1,0 +1,19 @@
+class Solution {
+    public int sumOfDigits(int[] A) {
+        //find min
+        int min = A[0];
+        for (int i=1; i<A.length; i++) {
+            min = Math.min(min, A[i]);
+        }
+        //number of digits in min
+        int temp = min;
+        int sum=0;
+        while (temp != 0) {
+            sum = sum + temp%10;
+            temp = temp/10;
+        }
+        
+        //even or odd
+        return (sum%2 == 0) ? 1 : 0;
+    }
+}

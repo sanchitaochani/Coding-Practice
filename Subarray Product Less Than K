@@ -1,0 +1,24 @@
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        int count = 0;
+        for (int i = 0; i<nums.length; i++) {
+            for (int j = i ; j<nums.length; j++) {
+                if (subarrayProduct(nums,i,j,k) < k) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+    
+    public int subarrayProduct(int[] nums, int left, int right, int target) {
+        int product = 1;
+        for (int i = left; i<=right; i++) {
+            if (product * nums[i]<target)
+                product = product * nums[i];
+            else
+                return Integer.MAX_VALUE;
+        }
+        return product;
+    }
+}

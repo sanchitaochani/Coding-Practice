@@ -9,6 +9,8 @@ class Solution {
             if (result < sum) {
                 result = sum;
             }
+            
+            // result = Math.max(result, sum);
         }
         return result;
     }

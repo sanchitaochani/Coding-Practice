@@ -1,0 +1,9 @@
+class Solution {
+    fun maximumWealth(accounts: Array<IntArray>): Int {
+        var max = 0
+        for (money in accounts) {
+            max = maxOf(money.sum(), max)
+        }
+        return max
+    }
+}

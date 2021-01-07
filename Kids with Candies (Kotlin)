@@ -1,0 +1,17 @@
+class Solution {
+    fun kidsWithCandies(candies: IntArray, extraCandies: Int): BooleanArray {
+        var greatest = 0
+        val result : MutableList<Boolean> = ArrayList()
+        for (item in candies) {
+            greatest = maxOf(greatest, item)
+        }
+        for (item in candies) {
+            if (item + extraCandies >= greatest) {
+                result.add(true)
+            } else {
+                result.add(false)
+            }
+        }
+        return result.toBooleanArray()
+    }
+}

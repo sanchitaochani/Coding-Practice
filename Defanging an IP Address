@@ -12,3 +12,11 @@ class Solution {
         return sb.toString();
     }
 }
+
+
+class Solution {
+    public String defangIPaddr(String address) {
+        String result = address.replace(".", "[.]");
+        return result;
+    }
+}

@@ -1,0 +1,35 @@
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        String s1 = String.join("", word1);
+        String s2 = String.join("", word2);
+        return s1.equals(s2);
+    }
+}
+
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        List<Character> list1 = new ArrayList<>();
+        for (int i=0; i<word1.length; i++) {
+            for (char c : word1[i].toCharArray()) {
+                list1.add(c);
+            }
+        }
+        List<Character> list2 = new ArrayList<>();
+        for (int i=0; i<word2.length; i++) {
+            for (char c : word2[i].toCharArray()) {
+                list2.add(c);
+            }
+        }
+        
+        if (list1.size() != list2.size()) {
+            return false;
+        }
+        
+        for (int i=0; i<list1.size(); i++) {
+            if (list1.get(i) != list2.get(i)) {
+                return false;
+            } else continue;
+        }
+        return true;
+    }
+}

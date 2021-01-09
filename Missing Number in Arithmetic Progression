@@ -1,0 +1,14 @@
+class Solution {
+    public int missingNumber(int[] arr) {
+        int len = arr.length;
+        int diff = (arr[len-1] - arr[0]) / len;
+        int i = 0;
+        while (i<len-1) {
+            if (arr[i+1] - arr[i] != diff) {
+                return arr[i]+diff;
+            }
+            i++;
+        }
+        return arr[i-1]+diff;
+    }
+}

@@ -1,0 +1,17 @@
+class Solution {
+    public int calculateTime(String keyboard, String word) {
+        int move = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i=0; i<keyboard.length(); i++) {
+            map.put(keyboard.charAt(i), i);
+        }
+        int current = 0;
+        for (int i=0; i<word.length(); i++) {
+            int position = map.get(word.charAt(i));
+            int diff = Math.abs(position - current);
+            current = position;
+            move = move + diff;
+        }
+        return move;
+    }
+}

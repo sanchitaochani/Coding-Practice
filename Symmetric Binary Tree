@@ -25,6 +25,6 @@ class Solution {
         if(node1 == null || node2 == null) {
             return false;
         }
-        return (node1.val == node2.val) && isSym(node1.left, node2.left) && isSym(node1.right, node2.right);
+        return (node1.val == node2.val) && isSym(node1.left, node2.right) && isSym(node1.right, node2.left);
     }
 }

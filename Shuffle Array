@@ -1,0 +1,17 @@
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+        int[] result = new int[nums.length];
+        int i=0, j=0, k=n;
+        while(i<nums.length && j<nums.length && k<nums.length) {
+            if (i%2 == 0) {
+                result[i] = nums[j];
+                j++;
+            } else {
+                result[i] = nums[k];
+                k++;
+            }
+            i++;
+        }
+        return result;
+    }
+}

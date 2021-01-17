@@ -15,3 +15,27 @@ class Solution {
         return result;
     }
 }
+
+class Solution {
+    public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
+        List<Integer> result = new ArrayList<>();
+        int x = 0, y = 0, z = 0;
+        while (x < arr1.length && y < arr2.length && z < arr3.length) {
+            if (arr1[x] == arr2[y] && arr2[y] == arr3[z]) {
+                result.add(arr1[x]);
+                x++;
+                y++;
+                z++;
+            } else {
+                if (arr1[x] < arr2[y]) {
+                    x++;
+                } else if (arr2[y] < arr3[z]) {
+                    y++;
+                } else {
+                    z++;
+                }
+            }
+        }
+        return result;
+    }
+}

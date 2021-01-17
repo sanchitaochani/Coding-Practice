@@ -1,0 +1,41 @@
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        int mid = s.length()/2;
+        int vowel1 = 0, vowel2 = 0;
+        for (int i=0, j=mid; i<mid && j<s.length(); i++, j++) {
+            if (s.charAt(i) == 'a' || s.charAt(i) == 'A'
+               || s.charAt(i) == 'e' || s.charAt(i) == 'E'
+               || s.charAt(i) == 'i' || s.charAt(i) == 'I'
+               || s.charAt(i) == 'o' || s.charAt(i) == 'O'
+               || s.charAt(i) == 'u' || s.charAt(i) == 'U') {
+                vowel1++;
+            }
+            if (s.charAt(j) == 'a' || s.charAt(j) == 'A'
+               || s.charAt(j) == 'e' || s.charAt(j) == 'E'
+               || s.charAt(j) == 'i' || s.charAt(j) == 'I'
+               || s.charAt(j) == 'o' || s.charAt(j) == 'O'
+               || s.charAt(j) == 'u' || s.charAt(j) == 'U') {
+                vowel2++;
+            }
+        }
+        return vowel1 == vowel2;
+    }
+}
+
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        int mid = s.length()/2;
+        int vowel1 = 0, vowel2 = 0;
+        String vowels = "aeiouAEIOU";
+        for (int i=0, j=mid; i<mid && j<s.length(); i++, j++) {
+            if (vowels.indexOf(s.charAt(i)) != -1) {
+                vowel1++;
+            }
+            if (vowels.indexOf(s.charAt(j)) != -1) {
+                vowel2++;
+            }
+        }
+        return vowel1 == vowel2;
+    }
+}
+

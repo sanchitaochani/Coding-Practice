@@ -22,3 +22,31 @@ class Solution {
         return result.toArray(arr);
     }
 }
+
+class Solution {
+    public int[][] highFive(int[][] items) {
+        TreeMap<Integer, PriorityQueue<Integer>> map = new TreeMap<>();
+        for (int i=0; i<items.length; i++) {
+            if (!map.containsKey(items[i][0])) {
+                PriorityQueue<Integer> queue = new PriorityQueue<>();
+                queue.add(items[i][1]);
+                map.put(items[i][0], queue);
+            } else {
+                map.get(items[i][0]).add(items[i][1]);
+                if (map.get(items[i][0]).size() > 5) {
+                    map.get(items[i][0]).poll();
+                }
+            }
+        }
+        List<int[]> result = new ArrayList<>();
+        for (int id: map.keySet()) {
+            int sum = 0;
+            for (int j=0; j<5; j++) {
+                sum = sum + map.get(id).poll();
+            }
+            result.add(new int[] { id, sum / 5});
+        }
+        int[][] arr = new int[result.size()][];
+        return result.toArray(arr);
+    }
+}

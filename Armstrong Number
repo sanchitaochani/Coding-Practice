@@ -17,3 +17,18 @@ class Solution {
         return sum == N ? true : false;
     }
 }
+
+class Solution {
+    public boolean isArmstrong(int N) {
+        int temp = N;
+        List<Integer> list = new ArrayList<>();
+        int len = String.valueOf(N).length();
+        int sum = 0;
+        while (temp != 0) {
+            list.add(temp%10);
+            sum = sum + (int) Math.pow(temp%10, len);
+            temp = temp/10;
+        }
+        return sum == N;
+    }
+}

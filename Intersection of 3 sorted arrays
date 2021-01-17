@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> arraysIntersection(int[] arr1, int[] arr2, int[] arr3) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        List<Integer> result = new ArrayList<>();
+        for (int i=0; i<arr1.length; i++) {
+            map.put(arr1[i], map.getOrDefault(arr1[i], 0) + 1);
+            map.put(arr2[i], map.getOrDefault(arr2[i], 0) + 1);
+            map.put(arr3[i], map.getOrDefault(arr3[i], 0) + 1);
+        }
+        for (Integer item: map.keySet()) {
+            if (map.get(item) == 3) {
+                result.add(item);
+            }
+        }
+        return result;
+    }
+}

@@ -23,3 +23,33 @@ class Solution {
 }
         
     
+class Solution {
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> result = new ArrayList<>();
+        while (left < 10) {
+            result.add(left++);
+        }
+        while (left <= right) {
+            if (isSelfDividing(left)) {
+                result.add(left);
+            }
+            left++;
+        }
+        return result;
+    }
+    
+    public boolean isSelfDividing(int num) {
+        int temp = num;
+        while (temp > 0) {
+            int digit = temp % 10;
+            if (digit == 0) {
+                return false;
+            }
+            if (num % digit != 0) {
+                return false;
+            }
+            temp = temp / 10;
+        }
+        return true;
+    }
+}

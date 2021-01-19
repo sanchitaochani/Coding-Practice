@@ -1,0 +1,28 @@
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+        for (int i=0; i<target.length; i++) {
+            if (target[i] != arr[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public boolean canBeEqual(int[] target, int[] arr) {
+        int[] exists = new int[1001];
+        for (int i=0; i<target.length; i++) {
+            exists[target[i]]++;
+            exists[arr[i]]--;
+        }
+        for(int i=0; i<exists.length; i++) {
+            if (exists[i] != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}

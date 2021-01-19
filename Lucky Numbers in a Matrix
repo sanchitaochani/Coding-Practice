@@ -1,0 +1,59 @@
+class Solution {
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        for (int i=0; i<matrix.length; i++) {
+            for (int j=0; j<matrix[i].length; j++) {
+                if (isMinRow(matrix, i, j) && isMaxColumn(matrix, i, j)) {
+                    result.add(matrix[i][j]);
+                }
+            }
+        }
+        return result;
+    }
+    
+    public boolean isMinRow(int[][] matrix, int i, int j) {
+        int min = matrix[i][j];
+        for (int index=0; index<matrix[i].length; index++) {
+            if (matrix[i][index] < min) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    public boolean isMaxColumn(int[][] matrix, int i, int j) {
+        int max = matrix[i][j];
+        for (int index=0; index<matrix.length; index++) {
+            if (matrix[index][j] > max) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public List<Integer> luckyNumbers (int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        HashMap<Integer, Integer> map = new HashMap<>();
+        
+        for(int i=0; i<matrix.length; i++){
+            int minRow = Integer.MAX_VALUE;
+            for(int j=0; j<matrix[i].length; j++) {
+                minRow = Math.min(minRow, matrix[i][j]);
+            }
+            map.put(minRow,1);
+        }
+        
+        for(int j=0; j<matrix[0].length; j++) {
+            int maxColumn = Integer.MIN_VALUE;
+            for (int i=0; i<matrix.length; i++) {
+                maxColumn = Math.max(maxColumn, matrix[i][j]);
+            }
+            if (map.get(maxColumn) != null && map.get(maxColumn) == 1){
+                result.add(maxColumn);
+            }
+        }
+        return result;
+    }
+}

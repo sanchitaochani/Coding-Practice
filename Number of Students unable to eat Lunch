@@ -21,3 +21,22 @@ class Solution {
         return queue.size();
     }
 }
+
+class Solution {
+    public int countStudents(int[] students, int[] sandwiches) {
+        int[] prefer = new int[2];
+        for (int i=0; i<students.length; i++) {
+            prefer[students[i]]++;
+        }
+        int studentsWhoAte = 0;
+        for (int i=0; i<sandwiches.length; i++) {
+            if (prefer[sandwiches[i]] == 0) {
+                break;
+            } else {
+                prefer[sandwiches[i]]--;
+                studentsWhoAte++;
+            }
+        }
+        return students.length - studentsWhoAte;
+    }
+}

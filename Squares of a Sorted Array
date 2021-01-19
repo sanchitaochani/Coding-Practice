@@ -1,10 +1,24 @@
 class Solution {
-    public int[] sortedSquares(int[] A) {
-        int[] arr_squares = new int[A.length];
-        for (int i=0; i<A.length; i++) {
-            arr_squares[i] = (int) Math.pow(A[i],2);
+    public int[] sortedSquares(int[] nums) {
+        for (int i=0; i<nums.length; i++) {
+            nums[i] = nums[i] * nums[i];
         }
-        Arrays.sort(arr_squares);
-        return arr_squares;
+        Arrays.sort(nums);
+        return nums;
     }
 }
+
+class Solution {
+    public int[] sortedSquares(int[] nums) {
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+        for (int i=0; i<nums.length; i++) {
+            queue.add(nums[i] * nums[i]);
+        }
+        int i = 0;
+        while (!queue.isEmpty()) {
+            nums[i++] = queue.poll();
+        }
+        return nums;
+    }
+}
+

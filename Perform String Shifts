@@ -1,0 +1,43 @@
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        int len = s.length();
+        for (int i=0; i<shift.length; i++) {
+            int move = shift[i][0];
+            int amount = shift[i][1] % len;
+            if (move == 0) {
+                s = s.substring(amount) + s.substring(0, amount);
+            } else {
+                s = s.substring(len - amount) + s.substring(0, len - amount);
+            }
+        }
+        return s;
+    }
+}
+
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        int len = s.length();
+        int leftShift = 0;
+        int rightShift = 0;
+        int shiftSum = 0;
+        for (int[] move : shift) {
+            if (move[0] == 0) {
+                leftShift = leftShift + move[1];
+            } else {
+                rightShift = rightShift + move[1];
+            }
+        }
+        shiftSum = (leftShift - rightShift) % len;
+        if (shiftSum < 0) {
+            // shift right
+            shiftSum *= -1;
+            s = s.substring(len - shiftSum) + s.substring(0, len - shiftSum);
+        } else if (shiftSum > 0) {
+            // shift left
+            s = s.substring(shiftSum) + s.substring(0, shiftSum);
+        } else {
+            return s;
+        }
+        return s;
+    }
+}

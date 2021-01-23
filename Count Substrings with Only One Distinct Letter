@@ -1,0 +1,32 @@
+class Solution {
+    public int countLetters(String S) {
+        int count = 1;
+        int[] substrings = new int[S.length()];
+        substrings[0] = 1;
+        for (int i=1; i<S.length(); i++) {
+            if (S.charAt(i-1) == S.charAt(i)) {
+                substrings[i] = substrings[i-1] + 1;
+            } else {
+                substrings[i] = 1;
+            }
+            count = count + substrings[i];
+        }
+        return count;
+    }
+}
+
+class Solution {
+    public int countLetters(String S) {
+        int count = 1;
+        int result = 1;
+        for (int i=1; i<S.length(); i++) {
+            if (S.charAt(i-1) == S.charAt(i)) {
+                count++;
+            } else {
+                count = 1;
+            }
+            result = result + count;
+        }
+        return result;
+    }
+}

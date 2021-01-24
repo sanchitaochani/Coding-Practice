@@ -1,0 +1,30 @@
+class Solution {
+    public String freqAlphabets(String s) {
+        HashMap<String, Character> map = new HashMap<>();
+        StringBuilder result = new StringBuilder();
+        char alpha = 'a';
+        for (int i = 1; i<27; i++) {
+            if (i<10) {
+                map.put(String.valueOf(i), alpha++);
+            } else {
+                map.put((String.valueOf(i)+"#"), alpha++);
+            }
+        }
+        if (s.length() == 1) {
+            return map.get(s.substring(0)) + "";
+        }
+        int j = 0;
+        while (j<s.length()) {
+            if (j+2 < s.length() && s.charAt(j+2) == '#') {
+                String temp = s.substring(j, j+2) + '#';
+                result.append(map.get(temp));
+                j +=3;
+            } else {
+                String temp = s.substring(j, j+1);
+                result.append(map.get(temp));
+                j++;
+            }
+        }
+        return result.toString();
+    }
+}

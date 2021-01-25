@@ -1,0 +1,28 @@
+class Solution {
+    public int maxNumberOfApples(int[] arr) {
+        Arrays.sort(arr);
+        int sum = 0, result = 0;
+        for (int i=0; i<arr.length; i++) {
+            if (sum + arr[i] < 5000) {
+                sum += arr[i];
+                result++;
+            }
+        }
+        return result;
+    }
+}
+
+class Solution {
+    public int maxNumberOfApples(int[] arr) {
+        Queue<Integer> queue = new PriorityQueue<>();
+        for (int i=0; i<arr.length; i++) {
+            queue.add(arr[i]);
+        }
+        int sum = 0, result = 0;
+        while (!queue.isEmpty() && sum + queue.peek() < 5000) {
+            sum += queue.poll();
+            result++;
+        }
+        return result;
+    }
+}

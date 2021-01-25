@@ -1,0 +1,21 @@
+class Solution {
+    public ListNode deleteNodes(ListNode head, int m, int n) {
+        ListNode temp = head;
+        ListNode delete = head;
+        while (temp != null) {
+            int counter = m;
+            while (temp != null && counter != 0) {
+                delete = temp;
+                temp = temp.next;
+                counter--;
+            }
+            counter = n;
+            while (temp != null && counter != 0) {
+                temp = temp.next;
+                counter--;
+            }
+            delete.next = temp;
+        }
+        return head;
+    }
+}

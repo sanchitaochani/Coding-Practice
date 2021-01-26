@@ -1,0 +1,40 @@
+class Solution {
+    public String modifyString(String s) {
+        if (s.length() == 1) {
+            if (s.charAt(0) != '?') {
+                return s;
+            } else {
+                return "s";
+            }
+        }
+        StringBuilder sb = new StringBuilder(s);
+        if (sb.charAt(0) == '?') {
+            if (sb.charAt(1) != 'a') {
+                sb.replace(0, 1, "a");
+            } else {
+                sb.replace(0, 1, "b");
+            }
+        }
+        for (int i=1; i<sb.length()-1; i++) {
+            if (sb.charAt(i) == '?') {
+                if (sb.charAt(i+1) != 'a' && sb.charAt(i-1) != 'a') {
+                    sb.replace(i, i+1, "a");
+                } else {
+                    if (sb.charAt(i+1) != 'b' && sb.charAt(i-1) != 'b') {
+                        sb.replace(i, i+1, "b");
+                    } else {
+                        sb.replace(i, i+1, "c");
+                    }
+                }
+            }
+        }
+        if (sb.charAt(sb.length()-1) == '?') {
+            if (sb.charAt(sb.length()-2) != 'a') {
+                sb.replace(sb.length()-1, sb.length(), "a");
+            } else {
+                sb.replace(sb.length()-1, sb.length(), "b");
+            }
+        }
+        return sb.toString();
+    }
+}

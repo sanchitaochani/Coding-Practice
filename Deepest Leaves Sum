@@ -1,0 +1,25 @@
+class Solution {
+    int maxDepth = 0;
+    int sum = 0;
+    public int deepestLeavesSum(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        traverse(root, 1);
+        return sum;
+    }
+    
+    public void traverse(TreeNode node, int depth) {
+        if (node == null) {
+            return;
+        }
+        if (depth > maxDepth) {
+            sum = node.val;
+            maxDepth = depth;
+        } else if (depth == maxDepth) {
+            sum += node.val;
+        }
+        traverse(node.left, depth + 1);
+        traverse(node.right, depth + 1);
+    }
+}

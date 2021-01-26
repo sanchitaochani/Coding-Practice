@@ -1,0 +1,39 @@
+class Solution {
+    HashMap<Integer, Employee> empMap = new HashMap<>();
+    public int getImportance(List<Employee> employees, int id) {
+        for (Employee emp : employees) {
+            empMap.put(emp.id, emp);
+        }
+        return dfs(id);
+    }
+    
+    public int dfs(int id) {
+        Employee e = empMap.get(id);
+        int result = e.importance;
+        for (Integer subid: e.subordinates) {
+            result += dfs(subid);
+        }
+        return result;
+    }
+}
+
+class Solution {
+    int result = 0;
+    public int getImportance(List<Employee> employees, int id) {
+        for (int j = 0; j<employees.size(); j++) {
+            if (id == employees.get(j).id) {
+                result += employees.get(j).importance;
+                if (employees.get(j).subordinates.size() == 0) {
+                    return result;
+                } else {
+                    for (int i=0; i < employees.get(j).subordinates.size(); i++) {
+                       getImportance(employees, employees.get(j).subordinates.get(i));
+                    }
+                }
+                break;
+            }
+        }
+        return result;
+    }
+
+}

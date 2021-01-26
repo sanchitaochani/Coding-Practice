@@ -1,21 +1,50 @@
 class Solution {
-    int count = 0;
+    int maxDepth = 0;
     public int maxDepth(Node root) {
         if (root == null)
             return 0;
         traverse(root, 1);
-        return count;
+        return maxDepth;
     }
     
     public void traverse(Node node, int depth) {
         if (node == null) {
             return;
         }
-        if (depth > count) {
-            count++;
+        if (depth > maxDepth) {
+            maxDepth++;
         }
         for (Node child : node.children) {
             traverse(child, depth+1);
         }
+    }
+}
+
+class Solution {
+    public int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        } else if (root.children.isEmpty()) {
+            return 1;
+        } else {
+            List<Integer> heights = new LinkedList<>();
+            for (Node item: root.children) {
+                heights.add(maxDepth(item));
+            }
+            return Collections.max(heights) + 1;
+        }
+    }
+}
+
+class Solution {
+    public int maxDepth(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        int maxDepth = 0;
+        for (Node node: root.children) {
+            maxDepth = Math.max(maxDepth, maxDepth(node));
+        }
+        return maxDepth + 1;
     }
 }

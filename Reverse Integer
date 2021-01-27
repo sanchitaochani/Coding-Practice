@@ -1,24 +1,23 @@
 class Solution {
     public int reverse(int x) {
         boolean negative = false;
-        if (x<0) {
-            x = x*-1;
+        if (x < 0) {
+            x = x * -1;
             negative = true;
         }
         int temp = x;
-        int y = 0;
-        while (temp>0) {
-            if (y>Integer.MAX_VALUE/10 || y<Integer.MIN_VALUE/10) {
+        int num = 0;
+        while (temp != 0) {
+            if (num < Integer.MIN_VALUE/10 || num > Integer.MAX_VALUE/10) {
                 return 0;
             }
-            else {
-                y = y * 10 + temp%10;
-                temp = temp/10;
-            }
+            num = num * 10 + temp % 10;
+            temp = temp / 10;
         }
-        if (negative)
-            return y*-1;
-        else
-            return y;
+        if (negative) {
+            return num * -1;
+        } else {
+            return num;
+        }
     }
 }

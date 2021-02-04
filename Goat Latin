@@ -26,3 +26,37 @@ class Solution {
         return result.toString().trim();
     }
 }
+
+class Solution {
+    public String toGoatLatin(String S) {
+        StringBuilder result = new StringBuilder();
+        String[] words = S.split(" ");
+        for (int i=0; i<words.length; i++) {
+            StringBuilder sb = new StringBuilder(words[i]);
+            if (isVowel(sb.charAt(0))) {
+                sb.append("ma");
+            } else {
+                char ch = sb.charAt(0);
+                sb.replace(0,1,"");
+                sb.append(ch + "ma");
+            }
+            for (int j=0; j<=i; j++) {
+                sb.append("a");
+            }
+            result.append(sb + " ");
+        }
+        return result.toString().trim();
+    }
+    
+    public boolean isVowel(char ch) {
+        if (ch == 'a' || ch == 'A'
+           || ch == 'e' || ch == 'E'
+           || ch == 'i' || ch == 'I'
+           || ch == 'o' || ch == 'O'
+           || ch =='u' || ch == 'U') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

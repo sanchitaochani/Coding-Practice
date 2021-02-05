@@ -1,0 +1,64 @@
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        StringBuilder sb = new StringBuilder(String.valueOf(x));
+        StringBuilder rev = new StringBuilder(String.valueOf(x));
+        rev.reverse();
+        return sb.toString().equals(rev.toString());
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        String s = String.valueOf(x);
+        int i =0; int j = s.length() - 1;
+        while (i<s.length()/2) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        if (x % 10 == 0 && x != 0) {
+            return false;
+        }
+        int temp = x;
+        int rev = 0;
+        while (temp != 0) {
+            rev = rev * 10 + temp % 10;
+            temp = temp / 10;
+        }
+        return x == rev;
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if (x < 0) {
+            return false;
+        }
+        if (x % 10 == 0 && x != 0) {
+            return false;
+        }
+        int rev = 0;
+        while (x > rev) {
+            rev = rev * 10 + x % 10;
+            x = x / 10;
+        }
+        return x == rev || x == rev/10;
+    }
+}

@@ -1,0 +1,109 @@
+class Solution {
+    public int numDecodings(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        int count = decode(s, 0);
+        return count;
+    }
+    
+    public int decode(String s, int index) {
+        if (s.length() == index) {
+            return 1;
+        }
+        if (s.charAt(index) == '0') {
+            return 0;
+        }
+        if (s.length()-1 == index) {
+            return 1;
+        }
+        int singleChar = decode(s, index+1);
+        int doubleChar = 0;
+        if (Integer.parseInt(s.substring(index, index+2)) <= 26) {
+            doubleChar = decode(s, index+2);
+        }
+        return singleChar + doubleChar;
+    }
+}
+
+//memoization
+
+class Solution {
+    public int numDecodings(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        int arr[] = new int[s.length()+1];
+        int count = decode(s, 0, arr);
+        return count;
+    }
+    
+    public int decode(String s, int index, int[] arr) {
+        if (s.length() == index) {
+            return 1;
+        }
+        if (s.charAt(index) == '0') {
+            return 0;
+        }
+        if (s.length()-1 == index) {
+            return 1;
+        }
+        if (arr[index] > 0) {
+            return arr[index];
+        }
+        int singleChar = decode(s, index+1, arr);
+        int doubleChar = 0;
+        if (Integer.parseInt(s.substring(index, index+2)) <= 26) {
+            doubleChar = decode(s, index+2, arr);
+        }
+        arr[index] = singleChar + doubleChar;
+        return arr[index];
+    }
+}
+
+class Solution {
+    public int numDecodings(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        int arr[] = new int[s.length()+1];
+        arr[0] = 1;
+        arr[1] = s.charAt(0) == '0' ? 0 : 1;
+        for (int i=2; i<=s.length(); i++) {
+            int singleChar = Integer.parseInt(s.substring(i-1, i));
+            int doubleChar = Integer.parseInt(s.substring(i-2, i));
+            if (singleChar > 0 && singleChar < 10) {
+                arr[i] += arr[i-1];
+            }
+            if (doubleChar <= 26 && doubleChar >= 10) {
+                arr[i] += arr[i-2];
+            }
+        }
+        return arr[s.length()];
+    }
+}
+
+class Solution {
+    public int numDecodings(String s) {
+        if (s.length() == 0) {
+            return 0;
+        }
+        if (s.charAt(0) == '0') {
+            return 0;
+        }
+        int p1 = 1, p2 = 1;
+        for (int i=1; i<s.length(); i++) {
+            int curr = 0;
+            if (s.charAt(i) != '0') {
+                curr = p1;
+            }
+            int doubleChar = Integer.parseInt(s.substring(i - 1, i + 1));
+            if (doubleChar <= 26 && doubleChar >= 10) {
+                curr += p2;
+            }
+            p2 = p1;
+            p1 = curr;
+        }
+        return p1;
+    }
+}

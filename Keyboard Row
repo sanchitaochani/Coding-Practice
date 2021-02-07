@@ -1,15 +1,19 @@
 class Solution {
     public String[] findWords(String[] words) {
-        String element;
-		ArrayList<String> solution= new ArrayList<String>();
-		for(int i=0;i<words.length;i++) {
-			element=words[i];
-			if(element.matches("[QWERTYUIOPqwertyuiop]+|[ASDFGHJKLasdfghjkl]+|[ZXCVBNMzxcvbnm]+")) {
-				solution.add(element);
-			}
-			
-		}
-		String[] sol=solution.toArray(new String[solution.size()]);
-        return sol;
+        String row1 = "[qwertyuiop]+";
+        String row2 = "[asdfghjkl]+";
+        String row3 = "[zxcvbnm]+";
+        List<String> list = new ArrayList<>();
+        for (String word: words) {
+            if (word.toLowerCase().matches(row1)) {
+                list.add(word);
+            } else if (word.toLowerCase().matches(row2)) {
+                list.add(word);
+            } else if (word.toLowerCase().matches(row3)) {
+                list.add(word);
+            }
+        }
+        String[] result = new String[list.size()];
+        return list.toArray(result);
     }
 }

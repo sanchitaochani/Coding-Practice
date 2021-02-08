@@ -1,28 +1,25 @@
 class Solution {
     public List<String> subdomainVisits(String[] cpdomains) {
-        HashMap<String, Integer> hmap = new HashMap<>();
-        for (int i=0; i<cpdomains.length; i++) {
-            int index = cpdomains[i].indexOf(' ');
-            int num = Integer.parseInt(cpdomains[i].substring(0,index));
-            String s = cpdomains[i].substring(index);
-            String[] domains = s.split("\\.");
-            String temp="";
-            for (int j=domains.length-1; j>=0; j--) {
-            	if (j==domains.length-1)
-            		temp = ""+domains[j]+temp;
-            	else
-            		temp = domains[j]+"."+temp;
-                temp = temp.trim();
-                hmap.put(temp, hmap.getOrDefault(temp, 0)+ num);
+        HashMap<String, Integer> map = new HashMap<>();
+        for (String domain: cpdomains) {
+            int index = domain.indexOf(" ");
+            int count = Integer.parseInt(domain.substring(0, index));
+            String[] arr = domain.substring(index+1).split("\\.");
+            String temp = new String();
+            for (int j=arr.length-1; j>=0; j--) {
+                if (temp.isEmpty()) {
+                    temp = arr[j];
+                } else {
+                    temp = arr[j] + "." + temp;
+                }
+                map.put(temp, map.getOrDefault(temp, 0) + count);
             }
-            
         }
-        
         List<String> result = new ArrayList<>();
-        for (String s:hmap.keySet()) {
-            result.add(hmap.get(s)+" "+s);
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            String s = entry.getValue() + " " + entry.getKey();
+            result.add(s);
         }
-        
         return result;
     }
 }

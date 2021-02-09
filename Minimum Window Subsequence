@@ -38,3 +38,38 @@ class Solution {
         return matches == s2.length(); 
     }
 }
+
+
+
+class Solution {
+    public String minWindow(String S, String T) {
+        if (T.length() == 1) {
+            return S.indexOf(T.charAt(0)) == -1 ? "" : T;
+        }
+        String result = "";
+        int minLength = S.length() + 1;
+        int j = 0;
+        for (int i=0; i<S.length(); i++) {
+            if (S.charAt(i) == T.charAt(j)) {
+                j++;
+                if (j == T.length()) {
+                    int endPos = i+1;
+                    j--;
+                    while (j>=0) {
+                        if (S.charAt(i) == T.charAt(j)) {
+                            j--;
+                        }
+                        i--;
+                    }
+                    i++;
+                    j++;
+                    if (endPos - i < minLength) {
+                        minLength = endPos - i;
+                        result = S.substring(i, endPos);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+}

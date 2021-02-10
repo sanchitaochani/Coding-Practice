@@ -34,3 +34,39 @@ class Solution {
 		return sum;
 	}
 }
+
+
+class Solution {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) {
+            return false;
+        }
+        if (root.val == targetSum && root.left == null && root.right == null) {
+            return true;
+        }
+        int sum = root.val;
+        return helper(root, targetSum, sum);
+    }
+    
+    public boolean helper(TreeNode node, int targetSum, int currSum) {
+        if (node.left == null && node.right == null) {
+            if (currSum == targetSum) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        boolean b1 = false, b2 = false;
+        if (node.left != null) {
+            currSum += node.left.val;
+            b1 = helper(node.left, targetSum, currSum);
+            currSum -= node.left.val;
+        }
+        if (node.right != null) {
+            currSum += node.right.val;
+            b2 = helper(node.right, targetSum, currSum);
+            currSum -= node.right.val;
+        }
+        return b1 || b2;
+    }
+}

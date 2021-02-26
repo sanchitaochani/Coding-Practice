@@ -11,3 +11,21 @@ class Solution {
    }
 }
 
+class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
+        int count = 0;
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int t: time) {
+            int key = 60 - (t % 60);
+            if (map.containsKey(key)) {
+                count += map.get(key);
+            }
+            if (t % 60 == 0) {
+                map.put(60, map.getOrDefault(60, 0) + 1);
+            } else {
+                map.put(t % 60, map.getOrDefault(t % 60, 0) + 1);
+            }
+        }
+        return count;
+    }
+}

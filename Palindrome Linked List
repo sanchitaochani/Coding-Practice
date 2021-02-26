@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+        if (head == null || head.next == null) {
+            return true;
+        }
+        Stack<Integer> stack = new Stack<>();
+        ListNode slow = head, fast = head;
+        while (fast != null && fast.next != null) {
+            stack.push(slow.val);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast != null && fast.next == null) {
+            stack.add(slow.val);
+        }
+        while (slow != null && !stack.isEmpty()) {
+            if (stack.peek() != slow.val) {
+                return false;
+            } else {
+                slow = slow.next;
+                stack.pop();
+            }
+        }
+        return true;
+    }
+}

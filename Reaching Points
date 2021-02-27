@@ -1,0 +1,66 @@
+class Solution {
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        if (sx == tx && sy == ty) {
+            return true;
+        }
+        if (sx > tx || sy > ty) {
+            return false;
+        }
+        return reachingPoints(sx+sy, sy, tx, ty) || reachingPoints(sx, sx+sy, tx, ty);
+    }
+}
+
+class Solution {
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        if (tx == sx && ty == sy) {
+            return true;
+        }
+        if (ty >= tx && ty-tx >= sy) {
+            return reachingPoints(sx, sy, tx, ty-tx);
+        }
+        if (tx > ty && tx-ty >= sx) {
+            return reachingPoints(sx, sy, tx-ty, ty);
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        while (ty >= sy && tx >= sx) {
+            if (tx == sx && ty == sy) {
+                return true;
+            }
+            if (tx > ty) {
+                tx = tx - ty;
+            } else {
+                ty = ty - tx;
+            }
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public boolean reachingPoints(int sx, int sy, int tx, int ty) {
+        while (ty >= sy && tx >= sx) {
+            if (tx == ty) break;
+            if (tx > ty) {
+                if (ty > sy) {
+                    tx = tx % ty;
+                }
+                else {
+                    return (tx - sx) % ty == 0;
+                }
+            } else {
+                if (tx > sx) {
+                    ty = ty % tx;
+                }
+                else {
+                    return (ty - sy) % tx == 0;
+                }
+            }
+        }
+        return (tx == sx && ty == sy);
+    }
+}

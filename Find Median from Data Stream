@@ -1,0 +1,84 @@
+// List and sorting
+class MedianFinder {
+
+    List<Integer> list;
+    public MedianFinder() {
+        list = new ArrayList<>();
+    }
+    
+    public void addNum(int num) {
+        list.add(num);
+    }
+    
+    public double findMedian() {
+        Collections.sort(list);
+        int mid = list.size() / 2;
+        if (list.size() % 2 == 1) {
+            return 1.0 * list.get(mid);
+        } else {
+            return 1.0 * (list.get(mid) + list.get(mid-1)) / 2;
+        }
+    }
+}
+
+// insert in sorted list 
+class MedianFinder {
+
+    List<Integer> list;
+    public MedianFinder() {
+        list = new ArrayList<>();
+    }
+    
+    public void addNum(int num) {
+        int index = 0;
+        for (int i=0; i<list.size(); i++) {
+            if (list.get(i) > num) {
+                break;
+            }
+            index++;
+        }
+        list.add(index, num);
+    }
+    
+    public double findMedian() {
+        int mid = list.size() / 2;
+        if (list.size() % 2 == 1) {
+            return 1.0 * list.get(mid);
+        } else {
+            return 1.0 * (list.get(mid) + list.get(mid-1)) / 2;
+        }
+    }
+}
+
+// 2 Priority Queues (minHeap and maxHeap)
+class MedianFinder {
+
+    Queue<Integer> minHeap, maxHeap;
+
+    public MedianFinder() {
+        maxHeap = new PriorityQueue<>();
+        minHeap = new PriorityQueue<>(Collections.reverseOrder());
+    }
+    
+    public void addNum(int num) {
+        if (minHeap.isEmpty() || num <= minHeap.peek()) {
+            minHeap.offer(num);
+        } else {
+            maxHeap.offer(num);
+        }
+		if (minHeap.size() > maxHeap.size() + 1) {
+			maxHeap.offer(minHeap.poll());
+		} else if (minHeap.size() < maxHeap.size()) {
+			minHeap.offer(maxHeap.poll());
+		}
+    }
+    
+    public double findMedian() {
+        int size = minHeap.size() + maxHeap.size();
+        if (size % 2 == 1) {
+            return 1.0 * minHeap.peek();
+        } else {
+            return 1.0 * (minHeap.peek() + maxHeap.peek()) / 2;
+        }
+    }
+}

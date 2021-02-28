@@ -1,0 +1,56 @@
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        for (int i=0; i<nums.length-1; i+=2) {
+            if (nums[i] != nums[i+1]) {
+                return nums[i];
+            }
+        }
+        return nums[nums.length-1];
+    }
+}
+
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i=0; i<nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if (entry.getValue() == 1) {
+                return entry.getKey();
+            }
+        }
+        return nums[nums.length-1];
+    }
+}
+
+class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        return binarySearch(nums, 0, nums.length-1);
+    }
+    
+    public int binarySearch(int[] nums, int low, int high) {
+        int mid = low + (high - low) / 2;
+        boolean areHalvesEven = (high - mid) % 2 == 0;
+        if (mid-1 < 0 || mid+1 >= nums.length) {
+            return nums[mid];
+        }
+        if (nums[mid-1] != nums[mid] && nums[mid+1] != nums[mid]) {
+            return nums[mid];
+        }
+        if (nums[mid-1] == nums[mid]) {
+            if (areHalvesEven) {
+                return binarySearch(nums, low, mid-2);
+            } else {
+                return binarySearch(nums, mid+1, high);
+            }
+        } else if (nums[mid+1] == nums[mid]) {
+            if (areHalvesEven) {
+                return binarySearch(nums, mid+2, high);
+            } else {
+                return binarySearch(nums, low, mid-1);
+            }
+        }
+        return nums[low];
+    }
+}

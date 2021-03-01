@@ -1,11 +1,13 @@
 class Solution {
     public List<List<Integer>> getSkyline(int[][] buildings) {
-        int[][] arr = new int[buildings.length*2][2];
+        int[][] arr = new int[buildings.length*2][3];
         int j = 0;
         for (int i=0; i<buildings.length; i++) {
-            arr[j] = new int[] {buildings[i][0], buildings[i][2]};
+            // 0 for start
+            arr[j] = new int[] {buildings[i][0], buildings[i][2], 0};
             j++;
-            arr[j] = new int[] {buildings[i][1], buildings[i][2]};
+            // 1 for end
+            arr[j] = new int[] {buildings[i][1], buildings[i][2], 1};
             j++;
         }
         Arrays.sort(arr, new Comparator<int[]>() {
@@ -15,17 +17,26 @@ class Solution {
         });
         Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
         queue.add(0);
-        List<List<Integer>> result = new ArrayList<List<Integer>>();
+        LinkedList<List<Integer>> result = new LinkedList<List<Integer>>();
         int prevMax = 0;
         for (int[] b : arr) {
             if (queue.contains(b[1])) {
-                queue.remove(b[1]);
+                // if it's end of a building
+                if (b[2] == 1) {
+                    queue.remove(b[1]);
+                } else {
+                    
+                }
             } else {
                 queue.add(b[1]);
             }
             int currMax = queue.peek();
             if (prevMax != currMax) {
+                if (!result.isEmpty() && result.peekLast().get(0) == b[0]) {
+                    result.removeLast();
+                } else {
                     result.add(new ArrayList<>(Arrays.asList(b[0], currMax)));
+                }
                 prevMax = currMax;
              }
         }

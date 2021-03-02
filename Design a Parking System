@@ -1,0 +1,81 @@
+class ParkingSystem {
+
+    int[] big;
+    int[] small;
+    int[] medium;
+    int bigIndex = 0, mediumIndex = 0, smallIndex = 0;
+    public ParkingSystem(int big, int medium, int small) {
+        this.big = new int[big];
+        this.medium = new int[medium];
+        this.small = new int[small];
+    }
+    
+    public boolean addCar(int carType) {
+        switch (carType) {
+            case 1 : 
+                if (bigIndex < big.length) {
+                    bigIndex++;
+                    return true;
+                } else {
+                    return false;
+                }
+            case 2 :
+                if (mediumIndex < medium.length) {
+                    mediumIndex++;
+                    return true;
+                } else {
+                    return false;
+                }
+            case 3 :
+                if (smallIndex < small.length) {
+                    smallIndex++;
+                    return true;
+                } else {
+                    return false;
+                }
+            default : 
+                return false;
+        }
+    }
+}
+
+class ParkingSystem {
+
+    int big;
+    int small;
+    int medium;
+    
+    public ParkingSystem(int big, int medium, int small) {
+        this.big = big;
+        this.medium = medium;
+        this.small = small;
+    }
+    
+    public boolean addCar(int carType) {
+        switch (carType) {
+            case 1 : 
+                if (big == 0) {
+                    return false;
+                } else {
+                    big--;
+                    return true;
+                }
+            case 2 : 
+                if (medium == 0) {
+                    return false;
+                } else {
+                    medium--;
+                    return true;
+                }
+            case 3 : 
+                if (small == 0) {
+                    return false;
+                } else {
+                    small--;
+                    return true;
+                }
+            default : 
+                return false;
+        }
+    }
+}

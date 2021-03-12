@@ -1,0 +1,20 @@
+class Solution {
+    int depth = 0;
+    public int diameterOfBinaryTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        longestPath(root);
+        return depth;
+    }
+    
+    public int longestPath(TreeNode node) {
+        if (node == null) {
+            return 0;
+        } 
+        int leftMax = longestPath(node.left);
+        int rightMax = longestPath(node.right);
+        depth = Math.max(depth, leftMax+rightMax);
+        return Math.max(leftMax, rightMax) + 1;
+    }
+}

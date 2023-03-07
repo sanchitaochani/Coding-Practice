@@ -1,0 +1,56 @@
+class Solution {
+    public String alphabetBoardPath(String target) {
+        HashMap<Character, Pair<Integer, Integer>> map = new HashMap<Character, Pair<Integer, Integer>>();
+        char ch = 'a';
+        for (int i=0; i<6; i++) {
+            for (int j=0; j<5; j++) {
+                map.put(ch, new Pair(i, j));
+                ch++;
+                if (ch > 'z') {
+                    break;
+                }
+            }
+        }
+        int x = 0;
+        int y = 0;
+        StringBuffer result = new StringBuffer();
+        for (int i=0; i<target.length(); i++) {
+            char val = target.charAt(i);
+            Pair<Integer, Integer> pair = map.get(val);
+            result.append(compare(x, y, pair.getKey(), pair.getValue()));
+            x = pair.getKey();
+            y = pair.getValue();
+        }
+        return result.toString();
+    }
+
+    public String compare(int x, int y, int i, int j) {
+        StringBuffer temp = new StringBuffer();
+        if (x > i) {
+            while (x > i) {
+                temp.append('U');
+                x--;
+            }
+        } else if (x < i) {
+            while (x < i) {
+                temp.append('D');
+                x++;
+            }
+        } 
+        if (y > j) {
+            while (y > j) {
+                temp.append('L');
+                y--;
+            }
+        } else if (y < j) {
+            while (y < j) {
+                temp.append('R');
+                y++;
+            }
+        }
+        if (x == i && y == j) {
+            temp.append("!");
+        }
+        return temp.toString();
+    }
+}
